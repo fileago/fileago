@@ -1,0 +1,42 @@
+version: "2.2"
+services:
+  dms:
+    build: ./dms
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    expose:
+      - "8080"
+    restart: always
+    env_file:
+      - ./settings.env
+    volumes:
+      - ${FILEAGO_BASE}/dms/data:/dms/priv/data
+      - ${FILEAGO_BASE}/dms/dblogs:/dms/priv/dblogs
+      - ${FILEAGO_BASE}/dms/mnesia:/dms/priv/mnesia
+      - ${FILEAGO_BASE}/dms/avatars:/dms/priv/web/images/avatars
+      - ${FILEAGO_BASE}/dms/fonts:/tmp/fonts
+# Enable the below line only if you have a license key saved in that path
+#      - ${FILEAGO_BASE}/dms/license.key:/dms/license.key
+  db:
+    image: neo4j:3.2.1-enterprise
+    expose:
+      - "7474"
+      - "7687"
+    restart: always
+    env_file:
+      - ./settings.env
+    volumes:
+      - ${FILEAGO_BASE}/neo4j/data:/data
+  nginx:
+    build: ./nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - dms
+    restart: always
+    env_file:
+      - ./settings.env
+    volumes:
+      - ${FILEAGO_BASE}/nginx:/tmp/certs

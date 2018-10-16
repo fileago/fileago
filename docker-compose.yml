@@ -1,0 +1,31 @@
+version: "2.2"
+services:
+  dms:
+    build: ./dms
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+    expose:
+      - "8080"
+    restart: always
+    environment:
+      - SECRETCOOKIE=cookie
+      - WEBHOSTNAME=fileago.local.host 
+  db:
+    image: neo4j:3.2.1-enterprise
+    expose:
+      - "7474"
+      - "7687"
+    restart: always
+    environment:
+      - NEO4J_AUTH=neo4j/mypass
+  nginx:
+    build: ./nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - dms
+    restart: always
+    environment:
+      - WEBHOSTNAME=fileago.local.host 
