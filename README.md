@@ -10,6 +10,24 @@ Visit [fileago.com](https://www.fileago.com) for more details.
 - Docker
 - Git
 
+## Screenshots
+
+![Directory View](screenshots/screenshot1.png "Directory View")
+
+
+
+![File View](screenshots/screenshot2.png "File View")
+
+
+
+![File Sharing](screenshots/screenshot3.png "File Sharing")
+
+
+
+!["Access Logs"](screenshots/screenshot4.png "Access Logs")
+
+
+
 ## Installation
 
 ### For quick testing/demo
