@@ -78,7 +78,7 @@ Edit `settings.env`file and set value of `WEBHOSTNAME` to the server hostname. S
 docker-compose -f docker-compose-prod.yml up -d
 ```
 
-Visit https://<HOSTNAME> to begin the configuration process. Use the following information (exactly as it is given below) to fill in the form:
+Visit https://HOSTNAME to begin the configuration process. Use the following information (exactly as it is given below) to fill in the form:
 
 | Field          | Value        |
 | -------------- | ------------ |
