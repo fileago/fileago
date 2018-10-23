@@ -12,25 +12,31 @@ Visit [fileago.com](https://www.fileago.com) for more details.
 
 ## Screenshots
 
+**Directory View**
+
 ![Directory View](screenshots/screenshot1.png "Directory View")
 
 
+
+**File View**
 
 ![File View](screenshots/screenshot2.png "File View")
 
 
 
+**File Sharing**
+
 ![File Sharing](screenshots/screenshot3.png "File Sharing")
 
 
+
+**Access Logs**
 
 !["Access Logs"](screenshots/screenshot4.png "Access Logs")
 
 
 
-## Installation
-
-### For quick testing/demo
+## Installation - Testing
 
 ```shell
 cd /root
@@ -60,7 +66,7 @@ docker-compose stop
 docker-compose rm -f
 ```
 
-### In production
+## Installation - In production
 
 #### Prerequisites
 
@@ -85,7 +91,7 @@ cp /etc/letsencrypt/live/<HOSTNAME>/privkey.pem /opt/fileago/nginx/cert.key
 #### Installation
 
 ```shell
-cd /root
+cd /etc
 git clone https://github.com/fileago/fileago.git
 cd fileago
 ```
@@ -112,11 +118,15 @@ Once the initial setup is over, login as `admin` and create users and groups. Lo
 **CAUTION: only execute the below commands if you wish to remove FileAgo and all its data from your machine.**
 
 ```shell
-cd /root/fileago
+cd /etc/fileago
 docker-compose -f docker-compose-prod.yml stop
 docker-compose -f docker-compose-prod.yml rm -f
 rm -rf /opt/fileago
 ```
+
+## Documentation
+
+[Click here](https://www.fileago.com/docs/latest/)
 
 ## Questions?
 
