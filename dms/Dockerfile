@@ -1,8 +1,8 @@
-FROM fileago/fileago:1.1.0
+FROM fileago/fileago:1.2.0
 MAINTAINER support@fileago.com
 RUN set -xe \ 
     && apk add --no-cache --purge -uU \ 
-       fontconfig libreoffice ttf-freefont \ 
+       fontconfig libreoffice ttf-freefont openldap-clients \ 
        ttf-opensans ttf-dejavu ttf-ubuntu-font-family \
     && rm -rf /var/cache/apk/* /tmp/*
 COPY start.sh /bin/start.sh 

@@ -1,0 +1,138 @@
+<config>
+
+    <!-- Note: 'default' attributes are used to document a setting's default value as well as to use as fallback. -->
+    <!-- Note: When adding a new entry, a default must be set in WSD in case the entry is missing upon deployment. -->
+
+    <allowed_languages desc="List of supported languages of Writing Aids (spell checker, grammar checker, thesaurus, hyphenation) on this instance. Allowing too many has negative effect on startup performance." default="de_DE en_GB en_US es_ES fr_FR it nl pt_BR pt_PT ru">de_DE en_GB en_US es_ES fr_FR it nl pt_BR pt_PT ru</allowed_languages>
+
+    <tile_cache_path desc="Path to a directory where to keep the tile cache." type="path" relative="false" default="/var/cache/loolwsd"></tile_cache_path>
+    <sys_template_path desc="Path to a template tree with shared libraries etc to be used as source for chroot jails for child processes." type="path" relative="true" default="systemplate"></sys_template_path>
+    <lo_template_path desc="Path to a LibreOffice installation tree to be copied (linked) into the jails for child processes. Should be on the same file system as systemplate." type="path" relative="false" default="/opt/collaboraoffice6.0"></lo_template_path>
+    <child_root_path desc="Path to the directory under which the chroot jails for the child processes will be created. Should be on the same file system as systemplate and lotemplate. Must be an empty directory." type="path" relative="true" default="jails"></child_root_path>
+
+    <server_name desc="Hostname:port of the server running loolwsd. If empty, it's derived from the request." type="string" default=""></server_name>
+    <file_server_root_path desc="Path to the directory that should be considered root for the file server. This should be the directory containing loleaflet." type="path" relative="true" default="loleaflet/../"></file_server_root_path>
+
+    <memproportion desc="The maximum percentage of system memory consumed by all of the LibreOffice Online, after which we start cleaning up idle documents" type="double" default="80.0"></memproportion>
+    <num_prespawn_children desc="Number of child processes to keep started in advance and waiting for new clients." type="uint" default="1">1</num_prespawn_children>
+    <per_document desc="Document-specific settings, including LO Core settings.">
+        <max_concurrency desc="The maximum number of threads to use while processing a document." type="uint" default="4">4</max_concurrency>
+        <document_signing_url desc="The endpoint URL of signing server, if empty the document signing is disabled" type="string" default="https://app.vereign.com">https://app.vereign.com</document_signing_url>
+<redlining_as_comments desc="If true show red-lines as comments" type="bool" default="true">true</redlining_as_comments>
+        <idle_timeout_secs desc="The maximum number of seconds before unloading an idle document. Defaults to 1 hour." type="uint" default="3600">3600</idle_timeout_secs>
+        <!-- Idle save and auto save are checked every 30 seconds -->
+        <idlesave_duration_secs desc="The number of idle seconds after which document, if modified, should be saved. Defaults to 30 seconds." type="uint" default="30">30</idlesave_duration_secs>
+        <autosave_duration_secs desc="The number of seconds after which document, if modified, should be saved. Defaults to 5 minutes." type="uint" default="300">300</autosave_duration_secs>
+        <limit_virt_mem_kb desc="The maximum virtual memory allowed to each document process. 0 for unlimited, 1700 min." type="uint">0</limit_virt_mem_kb>
+        <limit_data_mem_kb desc="The maximum memory data segment allowed to each document process. 0 for unlimited." type="uint">0</limit_data_mem_kb>
+        <limit_stack_mem_kb desc="The maximum stack size allowed to each document process. 0 for unlimited." type="uint">8000</limit_stack_mem_kb>
+        <limit_file_size_mb desc="The maximum file size allowed to each document process to write. 0 for unlimited." type="uint">0</limit_file_size_mb>
+        <limit_num_open_files desc="The maximum number of files allowed to each document process to open. 0 for unlimited." type="uint">0</limit_num_open_files>
+    <limit_load_secs desc="Maximum number of seconds to wait for a document load to succeed. 0 for unlimited." type="uint" default="100">100</limit_load_secs>
+    </per_document>
+
+    <per_view desc="View-specific settings.">
+        <out_of_focus_timeout_secs desc="The maximum number of seconds before dimming and stopping updates when the browser tab is no longer in focus. Defaults to 60 seconds." type="uint" default="60">60</out_of_focus_timeout_secs>
+        <idle_timeout_secs desc="The maximum number of seconds before dimming and stopping updates when the user is no longer active (even if the browser is in focus). Defaults to 15 minutes." type="uint" default="900">900</idle_timeout_secs>
+    </per_view>
+
+    <loleaflet_html desc="Allows UI customization by replacing the single endpoint of loleaflet.html" type="string" default="loleaflet.html">loleaflet.html</loleaflet_html>
+
+    <logging>
+        <color type="bool">true</color>
+        <level type="string" desc="Can be 0-8, or none (turns off logging), fatal, critical, error, warning, notice, information, debug, trace" default="warning">warning</level>
+        <file enable="false">
+            <property name="path" desc="Log file path.">/var/log/loolwsd.log</property>
+            <property name="rotation" desc="Log file rotation strategy. See Poco FileChannel.">never</property>
+            <property name="archive" desc="Append either timestamp or number to the archived log filename.">timestamp</property>
+            <property name="compress" desc="Enable/disable log file compression.">true</property>
+            <property name="purgeAge" desc="The maximum age of log files to preserve. See Poco FileChannel.">10 days</property>
+            <property name="purgeCount" desc="The maximum number of log archives to preserve. Use 'none' to disable purging. See Poco FileChannel.">10</property>
+            <property name="rotateOnOpen" desc="Enable/disable log file rotation on opening.">true</property>
+            <property name="flush" desc="Enable/disable flushing after logging each line. May harm performance. Note that without flushing after each line, the log lines from the different processes will not appear in chronological order.">false</property>
+        </file>
+        <anonymize>
+            <filenames type="bool" desc="Enable to anonymize/obfuscate filenames in logs. If default is true, it was forced at compile-time and cannot be disabled." default="false">false</filenames>
+            <usernames type="bool" desc="Enable to anonymize/obfuscate usernames in logs. If default is true, it was forced at compile-time and cannot be disabled." default="false">false</usernames>
+        </anonymize>
+    </logging>
+
+    <loleaflet_logging desc="Logging in the browser console" default="false">false</loleaflet_logging>
+
+    <trace desc="Dump commands and notifications for replay. When 'snapshot' is true, the source file is copied to the path first." enable="false">
+        <path desc="Output path to hold trace file and docs. Use '%' for timestamp to avoid overwriting. For example: /some/path/to/looltrace-%.gz" compress="true" snapshot="false"></path>
+        <filter>
+            <message desc="Regex pattern of messages to exclude"></message>
+        </filter>
+        <outgoing>
+            <record desc="Whether or not to record outgoing messages" default="false">false</record>
+        </outgoing>
+    </trace>
+
+    <net desc="Network settings">
+      <proto type="string" default="all" desc="Protocol to use IPv4, IPv6 or all for both">all</proto>
+      <listen type="string" default="any" desc="Listen address that loolwsd binds to. Can be 'any' or 'loopback'.">any</listen>
+      <service_root type="path" default="" desc="Prefix all the pages, websockets, etc. with this path."></service_root>
+      <post_allow desc="Allow/deny client IP address for POST(REST)." allow="true">
+        <host desc="The IPv4 private 192.168 block as plain IPv4 dotted decimal addresses.">192\.168\.[0-9]{1,3}\.[0-9]{1,3}</host>
+        <host desc="Ditto, but as IPv4-mapped IPv6 addresses">::ffff:192\.168\.[0-9]{1,3}\.[0-9]{1,3}</host>
+        <host desc="The IPv4 loopback (localhost) address.">127\.0\.0\.1</host>
+        <host desc="Ditto, but as IPv4-mapped IPv6 address">::ffff:127\.0\.0\.1</host>
+        <host desc="The IPv6 loopback (localhost) address.">::1</host>
+      </post_allow>
+      <frame_ancestors desc="Specify who is allowed to embed the LO Online iframe (loolwsd and WOPI host are always allowed). Separate multiple hosts by space."></frame_ancestors>
+    </net>
+
+    <ssl desc="SSL settings">
+        <enable type="bool" desc="Controls whether SSL encryption is enable (do not disable for production deployment). If default is false, must first be compiled with SSL support to enable." default="true">false</enable>
+        <termination desc="Connection via proxy where loolwsd acts as working via https, but actually uses http." type="bool" default="true">true</termination>
+        <cert_file_path desc="Path to the cert file" relative="false">/etc/loolwsd/cert.pem</cert_file_path>
+        <key_file_path desc="Path to the key file" relative="false">/etc/loolwsd/key.pem</key_file_path>
+        <ca_file_path desc="Path to the ca file" relative="false">/etc/loolwsd/ca-chain.cert.pem</ca_file_path>
+        <cipher_list desc="List of OpenSSL ciphers to accept" default="ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH"></cipher_list>
+        <hpkp desc="Enable HTTP Public key pinning" enable="false" report_only="false">
+            <max_age desc="HPKP's max-age directive - time in seconds browser should remember the pins" enable="true">1000</max_age>
+            <report_uri desc="HPKP's report-uri directive - pin validation failure are reported at this URL" enable="false"></report_uri>
+            <pins desc="Base64 encoded SPKI fingerprints of keys to be pinned">
+            <pin></pin>
+            </pins>
+        </hpkp>
+    </ssl>
+
+    <security desc="Altering these defaults potentially opens you to significant risk">
+      <seccomp desc="Should we use the seccomp system call filtering." type="bool" default="true">true</seccomp>
+      <capabilities desc="Should we require capabilities to isolate processes into chroot jails" type="bool" default="true">true</capabilities>
+    </security>
+
+    <storage desc="Backend storage">
+        <filesystem allow="false" />
+        <wopi desc="Allow/deny wopi storage. Mutually exclusive with webdav." allow="true">
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">localhost</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">dms</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">nginx</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">172\.1[6789]\.[0-9]{1,3}\.[0-9]{1,3}</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">172\.2[0-9]\.[0-9]{1,3}\.[0-9]{1,3}</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">172\.3[01]\.[0-9]{1,3}\.[0-9]{1,3}</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="true">192\.168\.[0-9]{1,3}\.[0-9]{1,3}</host>
+            <host desc="Regex pattern of hostname to allow or deny." allow="false">192\.168\.1\.1</host>
+            <max_file_size desc="Maximum document size in bytes to load. 0 for unlimited." type="uint">0</max_file_size>
+        </wopi>
+        <webdav desc="Allow/deny webdav storage. Mutually exclusive with wopi." allow="false">
+            <host desc="Hostname to allow" allow="false">localhost</host>
+        </webdav>
+    </storage>
+
+    <tile_cache_persistent desc="Should the tiles persist between two editing sessions of the given document?" type="bool" default="true">true</tile_cache_persistent>
+
+    <admin_console desc="Web admin console settings.">
+        <enable desc="Enable the admin console functionality" type="bool" default="true"></enable>
+        <enable_pam desc="Enable admin user authentication with PAM" type="bool" default="false"></enable_pam>
+        <username desc="The username of the admin console. Ignored if PAM is enabled."></username>
+        <password desc="The password of the admin console. Deprecated on most platforms. Instead, use PAM or loolconfig to set up a secure password."></password>
+    </admin_console>
+
+    <monitors desc="Addresses of servers we connect to on start for monitoring">
+    </monitors>
+
+</config>

@@ -13,7 +13,7 @@ services:
       - SECRETCOOKIE=cookie
       - WEBHOSTNAME=fileago.local.host 
   db:
-    image: neo4j:3.2.1-enterprise
+    image: graphfoundation/ongdb:3.5.1
     expose:
       - "7474"
       - "7687"
@@ -24,8 +24,19 @@ services:
     build: ./nginx
     ports:
       - "443:443"
+    expose:
+      - "9999"
     depends_on:
       - dms
     restart: always
     environment:
       - WEBHOSTNAME=fileago.local.host 
+  lool:
+    build: ./lool
+    expose:
+      - "9980"
+    depends_on:
+      - dms
+    restart: always
+    cap_add:
+      - MKNOD

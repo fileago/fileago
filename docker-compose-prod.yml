@@ -20,7 +20,7 @@ services:
 # Enable the below line only if you have a license key saved in that path
 #      - ${FILEAGO_BASE}/dms/license.key:/dms/license.key
   db:
-    image: neo4j:3.2.1-enterprise
+    image: graphfoundation/ongdb:3.5.1
     expose:
       - "7474"
       - "7687"
@@ -33,6 +33,8 @@ services:
     build: ./nginx
     ports:
       - "443:443"
+    expose:
+      - "9999"
     depends_on:
       - dms
     restart: always
@@ -40,3 +42,12 @@ services:
       - ./settings.env
     volumes:
       - ${FILEAGO_BASE}/nginx:/tmp/certs
+  lool:
+    build: ./lool
+    expose:
+      - "9980"
+    depends_on:
+      - dms
+    restart: always
+    cap_add:
+      - MKNOD
