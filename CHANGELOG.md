@@ -1,3 +1,16 @@
+v1.3.0 - 6 Aug 2019
+---
+
+* Variable size file chunking algorithm support
+* Fixed bug regarding public share emails not getting sent
+* Creating new dir returns http 200 with data now, and not 204
+* ldapsearch can now do paged searches and fetch all results
+* Removed websocket connect/disconnect popup notification
+* Fixed bug where files created via WOPI was not respecting disk quota restrictions
+* Added support for preview of CAD files
+* Added support for sync agent application
+* Many minor bugs also fixed
+
 v1.2.0 - 11 Mar 2019
 ---
 
