@@ -1,3 +1,11 @@
+v1.3.1 - 24 Sep 2019
+---
+
+* Fixed bug where chunk creation failed for empty files
+* Notification emails now use images hosted at fileago.com
+* Fixed bug where API auth was crashing sometimes due to exceptions
+* Notification emails now more compatible to email standards
+
 v1.3.0 - 6 Aug 2019
 ---
 

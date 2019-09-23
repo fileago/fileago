@@ -6,7 +6,7 @@ Visit [fileago.com](https://www.fileago.com) for more details.
 
 ## Requirements
 
-- Linux machine with atleast 2GB RAM, 5GB free disk space
+- Linux machine with atleast 4GB RAM, 100GB free disk space
 - Docker
 - Git
 
