@@ -73,6 +73,12 @@ server {
         proxy_set_header Host $http_host;
     }
 
+    # cadviewer
+    location ~ ^/cadviewer {
+        proxy_pass http://cad;
+        proxy_set_header Host $http_host;
+    }
+
     # Admin Console websocket
     location ^~ /lool/adminws {
         proxy_pass http://lool;

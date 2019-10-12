@@ -1,7 +1,7 @@
-FROM centos:latest
+FROM centos:7.6.1810
 MAINTAINER support@fileago.com
 RUN set -eux \
-  && yum install httpd php php-gd wget -y \
+  && yum install httpd php php-gd wget fontconfig -y \
   && yum clean all && rm -rf /var/cache/yum \
   && wget http://cadviewerjs.com/downloads/cadviewer_4_1_0/php_linux_tar/cadviewer.tar.gz -O /tmp/cadviewer.tar.gz \
   && cd /tmp && tar zxf cadviewer.tar.gz && chown -R apache:apache /tmp/cadviewer && mv /tmp/cadviewer /var/www/html \
