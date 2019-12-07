@@ -1,14 +1,17 @@
 # FileAgo
 
-**FileAgo** is a self-hosted file storage and collaboration platform for teams and businesses.
+**FileAgo** is a self-hosted secure file management, file sharing, file sync and collaboration software for teams and businesses.
 
 Visit [fileago.com](https://www.fileago.com) for more details.
 
 ## Requirements
 
-- Linux machine with atleast 2GB RAM, 5GB free disk space
+- Linux (preferably CentOS 7.x)
 - Docker
-- Git
+- Git client, docker-compose
+- 8 GB RAM
+- 4 cores or more
+- Atleast 500 GB of available disk space
 
 ## Screenshots
 
