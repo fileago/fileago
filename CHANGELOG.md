@@ -1,3 +1,13 @@
+v1.4.0 - 8 Dec 2019
+---
+
+* FileAgo WebDrive (WebDAV) implementation
+* Encrypt and Preview manager processes now use different sqlite dbs
+* Send custom message in email while creating pubic shares
+* Support for usage of 'latest' and 'oldest' in file download url
+* File downloads reply now have Content-Length header set
+* Various other minor bugs fixed
+
 v1.3.1 - 24 Sep 2019
 ---
 
