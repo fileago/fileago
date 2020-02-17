@@ -1,3 +1,23 @@
+v1.4.1 - 18 Feb 2020
+---
+
+* Password protected public shares implementation
+* Fixed bug of files reporting incorrect updated time
+* Major architecture improvements in WebDrive
+* All deleted file revisions are now cleaned up from database
+* Maximum number of revisions now limited to 500
+* Maximum number of revisions for .slog and .dat files via WebDrive limited to 10
+* "Private share create" permission logic applies for copy sharing too
+* New config option in internal db: "allow_sharing_with_all_groups"
+* Ldap group sync functionality implementation
+* Ldap attribute "faDefaultQuota" to override quota value for individual users and groups
+* Support to skip WebDrive LOCK checks internally if needed
+* "If-None-Match" header support for WebDrive urls
+* Fixed bug where WebDrive was listing blocked resources
+* WebDrive replies now has cache-control header set to 'no-cache'
+* Fixed issues when file end up with multiple revisions having same timestamp
+* Some other minor bugs fixed
+
 v1.4.0 - 8 Dec 2019
 ---
 
