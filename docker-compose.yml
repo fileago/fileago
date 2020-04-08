@@ -9,17 +9,24 @@ services:
     expose:
       - "8080"
     restart: always
-    environment:
-      - SECRETCOOKIE=cookie
-      - WEBHOSTNAME=fileago.local.host 
+    env_file:
+      - ./settings.env
+    volumes:
+      - ${FILEAGO_BASE}/dms/data:/dms/priv/data
+      - ${FILEAGO_BASE}/dms/dblogs:/dms/priv/dblogs
+      - ${FILEAGO_BASE}/dms/mnesia:/dms/priv/mnesia
+      - ${FILEAGO_BASE}/dms/avatars:/dms/priv/web/images/avatars
+      - ${FILEAGO_BASE}/dms/fonts:/tmp/fonts
   db:
     image: graphfoundation/ongdb:3.5.1
     expose:
       - "7474"
       - "7687"
     restart: always
-    environment:
-      - NEO4J_AUTH=neo4j/mypass
+    env_file:
+      - ./settings.env
+    volumes:
+      - ${FILEAGO_BASE}/neo4j/data:/data
   nginx:
     build: ./nginx
     ports:
@@ -29,8 +36,10 @@ services:
     depends_on:
       - dms
     restart: always
-    environment:
-      - WEBHOSTNAME=fileago.local.host 
+    env_file:
+      - ./settings.env
+    volumes:
+      - ${FILEAGO_BASE}/nginx:/tmp/certs
   lool:
     build: ./lool
     expose:

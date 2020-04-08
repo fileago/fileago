@@ -1,0 +1,7 @@
+version: "2.2"
+services:
+  cad:
+    build: ./cad
+    expose:
+      - "80"
+    restart: always

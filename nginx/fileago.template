@@ -11,6 +11,8 @@
       server lool:9980;
     }
 
+##__CHAT_UPSTREAM_PLACEHOLDER__##
+
 proxy_cache_path /tmp/nginx-cache levels=1:2 keys_zone=fileago:10m max_size=1g inactive=180m use_temp_path=off;
 
 server {
@@ -39,6 +41,9 @@ server {
       proxy_redirect      http://dms https://${WEBHOSTNAME};
     }
 
+##__CHAT_BLOCK_PLACEHOLDER__##
+
+##__CAD_BLOCK_PLACEHOLDER__##
 
     # static files
     location ^~ /loleaflet {
