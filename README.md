@@ -75,7 +75,11 @@ Edit `settings.env`file and set value of `WEBHOSTNAME` to the server hostname. S
 docker-compose -f docker-compose.yml up -d
 ```
 
-**NOTE:** If you wish to run chat and cad services, follow the instructions in `settings.env` file and start its corresponding docker-compose files along with docker-compose.yml.
+**NOTE:** If you wish to run `chat` or `cad` services, follow the instructions in `settings.env` file and start its corresponding docker-compose.`service`.yml files along with main docker-compose.yml. For example, in order to start chat, the command will be:
+
+```shell
+docker-compose -f docker-compose.yml -f docker-compose.chat.yml up -d
+```
 
 Visit https://HOSTNAME to begin the configuration process. Use the following information (exactly as it is given below) to fill in the form:
 

@@ -1,3 +1,13 @@
+v1.5.0 - 10 Apr 2020
+---
+
+* Chat and video integration with Rocket.chat
+* Disable printing from browser on public shares
+* Accomodate incorrect urls in webdrive endpoint for broken clients
+* Add FileAgo version and license API endpoints
+* Allow updating license from Admin Panel
+* Minor UI enhancements and bugs also fixed
+
 v1.4.1 - 18 Feb 2020
 ---
 
