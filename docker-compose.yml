@@ -24,7 +24,7 @@ services:
       - "7687"
     restart: always
     env_file:
-      - ./settings.env
+      - ./db_settings.env
     volumes:
       - ${FILEAGO_BASE}/neo4j/data:/data
   nginx:
