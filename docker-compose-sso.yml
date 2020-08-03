@@ -1,0 +1,11 @@
+version: '2.2'
+
+services:
+  sso:
+    image: 'fileago/sso:latest'
+    volumes:
+      - ${FILEAGO_BASE}/sso:/app/sso
+    expose:
+      - "8081"
+    working_dir: /app
+    command: "app.js"

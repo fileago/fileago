@@ -1,3 +1,18 @@
+v1.6.0 - 3 Aug 2020
+---
+
+* Single Sign On (SAML) integration
+* [bugfix] Cleanup old chunks from tmp folder
+* [bugfix] Webdrive fails if & character is found in file/folder names
+* Improved performance of cleanup task
+* LDAP sync interval is now constant 5 minutes and cannot be changed by user
+* 'encrypt_files' is set true, and cannot be changed by user
+* Prevent shell expansion during ldapsearch command execution
+* License key is now stored in database itself
+* Prevent creation of folders if quota of target owner is exhausted
+* Allow/deny list implementation in backend for WebDrive and sharing (UI side tbd)
+* Several other minor bugs also fixed
+
 v1.5.0 - 10 Apr 2020
 ---
 
