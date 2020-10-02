@@ -25,6 +25,11 @@ mv certs/servers/localhost/cert.pem /etc/loolwsd/cert.pem
 mv certs/ca/root.crt.pem /etc/loolwsd/ca-chain.cert.pem
 fi
 
+# Disable warning/info messages of LOKit by default
+if test "${SAL_LOG-set}" == set; then
+SAL_LOG="-INFO-WARN"
+fi
+
 # Replace trusted host and set admin username and password
 perl -pi -e "s/localhost<\/host>/${domain}<\/host>/g" /etc/loolwsd/loolwsd.xml
 perl -pi -e "s/<username (.*)>.*<\/username>/<username \1>${username}<\/username>/" /etc/loolwsd/loolwsd.xml
@@ -39,6 +44,9 @@ perl -pi -e "s/<allowed_languages (.*)>.*<\/allowed_languages>/<allowed_language
 	/usr/bin/killall -1 loolwsd
 ) &
 
+# Generate WOPI proof key
+loolwsd-generate-proof-key
 
 # Start loolwsd (FileAgo change: exporting LOOL_NO_AUTOSAVE)
-LOOL_NO_AUTOSAVE=true exec /usr/bin/loolwsd --version --o:sys_template_path=/opt/lool/systemplate --o:child_root_path=/opt/lool/child-roots --o:file_server_root_path=/usr/share/loolwsd ${extra_params}
+LOOL_NO_AUTOSAVE=true exec /usr/bin/loolwsd --version --o:sys_template_path=/opt/lool/systemplate --o:child_root_path=/opt/lool/child-roots --o:file_server_root_path=/usr/share/loolwsd --o:user_interface.mode=notebookbar ${extra_params}
+
