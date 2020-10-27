@@ -30,7 +30,8 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "443:443"
+      - "443:443"   # FileAgo Web Portal
+#      - "5555:5555" # FileAgo Backup Service (Disabled by default. Enable only if necessary.)
     expose:
       - "9999"
     depends_on:

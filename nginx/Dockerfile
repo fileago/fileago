@@ -8,5 +8,6 @@ RUN chmod 755 /bin/start.sh
 RUN set -xe && apk add --no-cache --purge -uU openssl \ 
     && rm -rf /var/cache/apk/*
 EXPOSE 443
+EXPOSE 5555
 ENV WEBHOSTNAME fileago.mycompany.com
 CMD /bin/sh -c /bin/start.sh

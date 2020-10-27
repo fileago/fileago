@@ -1,4 +1,4 @@
-FROM fileago/fileago:1.6.0
+FROM fileago/fileago:1.7.0
 MAINTAINER support@fileago.com
 RUN set -xe \ 
     && apk add --no-cache --purge -uU \ 
@@ -8,6 +8,7 @@ RUN set -xe \
 COPY start.sh /bin/start.sh 
 RUN chmod 755 /bin/start.sh
 EXPOSE 8080
+EXPOSE 5555
 ENV SECRETCOOKIE mysecretcookie
 VOLUME ["/dms/priv/data", "/dms/priv/dblogs", "/dms/priv/mnesia", "/dms/priv/web/images/avatars", "/tmp/fonts"]
 ENTRYPOINT ["/sbin/tini", "--"]
