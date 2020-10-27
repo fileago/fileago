@@ -1,3 +1,18 @@
+v1.7.0 - 27 Oct 2020
+---
+
+* FileAgo BackupCentral implementation (file backup solution)
+* Integration with O365 and Microsoft Online Office Server
+* [bugfix] Display correct upload queue limit
+* [bugfix] LDAP parse failing with badarg error
+* Disable print screen for public shares
+* Store and display last login info of users in admin panel
+* Admin can export user list as csv from admin panel
+* [bugfix] Incorrect file version in WOPI
+* Watermark in DocView when accessing read-only documents
+* Show disk utilisation in admin panel
+* Some other minor bugs also fixed
+
 v1.6.0 - 3 Aug 2020
 ---
 
