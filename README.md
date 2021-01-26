@@ -105,7 +105,7 @@ rm -rf /opt/fileago
 
 ## Documentation
 
-[Click here](https://www.fileago.com/docs/latest/)
+[Click here](https://www.fileago.com/docs/)
 
 ## Questions?
 
