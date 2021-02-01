@@ -1,4 +1,4 @@
-FROM nginx:1.14-alpine
+FROM nginx:alpine
 COPY fileago.template /tmp/fileago.template
 COPY start.sh /bin/start.sh
 COPY config_parts /tmp/config_parts

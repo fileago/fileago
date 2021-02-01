@@ -7,9 +7,7 @@
       server dms:8080;
     }
 
-    upstream lool {
-      server lool:9980;
-    }
+##__LOOL_UPSTREAM_PLACEHOLDER__##
 
 ##__CHAT_UPSTREAM_PLACEHOLDER__##
 
@@ -45,48 +43,7 @@ server {
 
 ##__CAD_BLOCK_PLACEHOLDER__##
 
-    # static files
-    location ^~ /loleaflet {
-        proxy_pass http://lool;
-        proxy_set_header Host $http_host;
-    }
-
-    # WOPI discovery URL
-    location ^~ /hosting/discovery {
-        proxy_pass http://lool;
-        proxy_set_header Host $http_host;
-    }
-
-    # Capabilities
-    location ^~ /hosting/capabilities {
-        proxy_pass http://lool;
-        proxy_set_header Host $http_host;
-    }
-
-    # main websocket
-    location ~ ^/lool/(.*)/ws$ {
-        proxy_pass http://lool;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "Upgrade";
-        proxy_set_header Host $http_host;
-        proxy_read_timeout 36000s;
-    }
-
-    # download, presentation and image upload
-    location ~ ^/lool {
-        proxy_pass http://lool;
-        proxy_set_header Host $http_host;
-    }
-
-    # Admin Console websocket
-    location ^~ /lool/adminws {
-        proxy_pass http://lool;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "Upgrade";
-        proxy_set_header Host $http_host;
-        proxy_read_timeout 36000s;
-    }
-
+##__LOOL_BLOCK_PLACEHOLDER__##
 
     location = /ws {
       proxy_pass http://dms;

@@ -1,3 +1,26 @@
+v1.8.0 - 1 Feb 2021
+---
+
+* [bugfix] Fix public share expiry time conflicts
+* [bugfix] Allow new version with same file size in wopi
+* [bugfix] Report web login for users when sso is enabled
+* [bugfix] prevent printing of public shares
+* [bugfix] Broken download links for file names with special characters
+* Multi-org support
+* webdrive LOCK period is now 30 minutes (earlier = 15 mins)
+* Backend configurable setting for trash retention period (in days)
+* Backend configurable setting for pending incoming share retention period (in days)
+* Support for S3 as backend storage for files
+* 6 months (180 days) is now a valid duration to preserve old revisions
+* Support for external lool/collabora server
+* robots.txt - hide everything from search engines
+* Save and show last synced time for devices
+* Support for cdn/proxy to cache data from S3
+* Prevent copy and share-by-copy to incoming of large folders (folder tree with > 500 files)
+* Bypass strict token/ip address matching if required
+* Support for cloudinit
+* Upload file queue limit is now 500 in Web Portal
+
 v1.7.0 - 27 Oct 2020
 ---
 

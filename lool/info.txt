@@ -1,2 +1,0 @@
-Based on: https://github.com/CollaboraOnline/Docker-CODE
-Latest commit: 0ee0f32 (Sep 27, 2020)

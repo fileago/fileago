@@ -18,7 +18,7 @@ services:
       - ${FILEAGO_BASE}/dms/avatars:/dms/priv/web/images/avatars
       - ${FILEAGO_BASE}/dms/fonts:/tmp/fonts
   db:
-    image: graphfoundation/ongdb:3.5.1
+    image: graphfoundation/ongdb:3.6
     expose:
       - "7474"
       - "7687"
@@ -31,7 +31,6 @@ services:
     build: ./nginx
     ports:
       - "443:443"   # FileAgo Web Portal
-#      - "5555:5555" # FileAgo Backup Service (Disabled by default. Enable only if necessary.)
     expose:
       - "9999"
     depends_on:
