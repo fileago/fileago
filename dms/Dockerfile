@@ -9,7 +9,6 @@ RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/bin/mc && ch
 COPY start.sh /bin/start.sh 
 RUN chmod 755 /bin/start.sh
 EXPOSE 8080
-EXPOSE 5555
 ENV SECRETCOOKIE mysecretcookie
 VOLUME ["/dms/priv/data", "/dms/priv/dblogs", "/dms/priv/mnesia", "/dms/priv/web/images/avatars", "/tmp/fonts"]
 ENTRYPOINT ["/sbin/tini", "--"]

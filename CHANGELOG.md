@@ -1,4 +1,4 @@
-v1.8.0 - 1 Feb 2021
+v1.8.0 - 9 Feb 2021
 ---
 
 * [bugfix] Fix public share expiry time conflicts
