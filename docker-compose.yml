@@ -18,7 +18,7 @@ services:
       - ${FILEAGO_BASE}/dms/avatars:/dms/priv/web/images/avatars
       - ${FILEAGO_BASE}/dms/fonts:/tmp/fonts
   db:
-    image: graphfoundation/ongdb:3.6
+    image: graphstack/ongdb:3.6
     expose:
       - "7474"
       - "7687"
