@@ -27,6 +27,7 @@ server {
     client_max_body_size 5G;
 
     location = / {
+      proxy_http_version 1.1;
       proxy_set_header        X-Real-IP $remote_addr;
       proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header        X-Forwarded-Proto $scheme;
@@ -53,6 +54,7 @@ server {
     }
 
     location ~* /(api|auth|install|upload|resources|public|wopi|webdrive|saml) {
+      proxy_http_version 1.1;
       proxy_set_header        X-Real-IP $remote_addr;
       proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header        X-Forwarded-Proto $scheme;
@@ -63,6 +65,7 @@ server {
     }
 
     location ~* /(.*) {
+      proxy_http_version 1.1;
       gzip on;
       gzip_types *;
       proxy_cache fileago;
@@ -96,6 +99,7 @@ server {
     error_log            /var/log/nginx/${WEBHOSTNAME}.error.log debug;
 
     location ~* /(.*) {
+      proxy_http_version 1.1;
       proxy_set_header        X-Real-IP $remote_addr;
       proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header        X-Forwarded-Proto $scheme;
