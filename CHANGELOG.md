@@ -1,3 +1,15 @@
+v1.8.1 - 3 Mar 2022
+---
+
+* [bugfix] Online license check failure
+* [bugfix] Grey in notification emails doesn't show in Outlook
+* Support for Collabora lool -> cool migration
+* Support for minio as s3 storage
+* Making webdrive compatible with FileAgo webdrive app
+* Ignore webdav locks by default
+* Set 60s timeout for cowboy
+* Several other minor bugs also fixed
+
 v1.8.0 - 9 Feb 2021
 ---
 
