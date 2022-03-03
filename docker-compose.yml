@@ -8,7 +8,7 @@ services:
       - db
     expose:
       - "8080"
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./settings.env
     volumes:
@@ -22,7 +22,7 @@ services:
     expose:
       - "7474"
       - "7687"
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./db_settings.env
     volumes:
@@ -35,7 +35,7 @@ services:
       - "9999"
     depends_on:
       - dms
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./settings.env
     volumes:
@@ -46,6 +46,6 @@ services:
       - "9980"
     depends_on:
       - dms
-    restart: always
+    restart: unless-stopped
     cap_add:
       - MKNOD
