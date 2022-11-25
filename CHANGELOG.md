@@ -1,3 +1,10 @@
+v1.8.2 - 19 Apr 2022
+---
+
+* API endpoint to change last modified timestamp
+* Several other minor bugs also fixed
+
+
 v1.8.1 - 3 Mar 2022
 ---
 
