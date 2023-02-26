@@ -7,7 +7,7 @@ RUN set -eux \
   && chown -R apache:apache cadviewer7-script-library-php-linux \
   && rm -f cadviewer7-script-library-php-linux/php/CADViewer_config.php \
   && mv cadviewer7-script-library-php-linux/php/CADViewer_config_docker.php cadviewer7-script-library-php-linux/php/CADViewer_config.php \
-  && mv /tmp/cadviewer7-script-library-php-linux /var/www/html
+  && mv /tmp/cadviewer7-script-library-php-linux /var/www/html/cadviewer
 COPY php.ini /etc/php.ini
 COPY cad.conf /etc/httpd/conf.d/
 COPY httpd-foreground /bin/

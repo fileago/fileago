@@ -40,6 +40,7 @@ services:
       - ./settings.env
     volumes:
       - ${FILEAGO_BASE}/nginx:/tmp/certs
+      - ${FILEAGO_BASE}/nginx_logs:/var/log/nginx
   lool:
     build: ./lool
     expose:

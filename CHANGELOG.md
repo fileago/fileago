@@ -1,3 +1,31 @@
+v2.0.0 - 26 Feb 2023
+---
+
+* [bugfix] Fix ldap sync issues which happen due to OU changes
+* [bugfix] Push to s3 queue if doc preview step does not succeed
+* [bugfix] Downloading non-ascii files from AWS S3 fails
+* [bugfix] Extend allowed character limits in ldap configuration for some arguments
+* Send quota related email alerts to admin
+* Export event logs as csv from admin panel
+* Allow tif/tiff file format to be viewed via DocView
+* Add chat redirect page for support in mobile app
+* Comply with new cadviewer.js versions
+* Optimise search, share & comment db queries
+* Show file name when hovering over the icon in dir list table on browser
+* Self-host Lato fonts, use latest jquery (self-hosted v3.6.3)
+* Set password expiry (aging) policy
+* Prevent users from setting same old password again
+* Scroll top navbar group menu if too many items to show
+* Show disclaimer in public share link
+* Hide temporary lock files (~$) from dir list on browser
+* Prevent creating new folders with name of existing resource in dir list
+* Prevent creating new files with name of existing resource in dir list
+* Create file duplicate (make a copy) impementation
+* Copy of files will copy latest revision only and not all revisions
+* FileAgo Webdrive dynamic etag support implementation
+* Store deleted data in Trash inside folder named after date of deletion
+* Several other minor bugs also fixed
+
 v1.8.2 - 19 Apr 2022
 ---
 
