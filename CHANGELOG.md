@@ -1,3 +1,42 @@
+v3.0.0 - 10 Feb 2025
+---
+
+* Complete rewrite of Web Portal code from AngularJS to ReactJS
+* Introducing a brand new modern UI design
+* Folder upload now possible from Web Portal
+* No preview generation step for Office documents (saves lot of disk space)
+* Office files now open directly in the Document Editor (Collabora)
+* Export as csv option available for users and groups list in Admin Panel
+* Event logs can now be searched w.r.t the type of event
+* New field of 'comment' in Admin Panel -> user creation form, and can be modified later on
+* Private share can now have an expiry date/time set during its creation
+* Public share can be created with one time view function (share link expires within 5 seconds of file viewing/downloading)
+* Public share expiry date/time can now be modified by the person who created the public share
+* Public share notification email now has its reply-to: set to the email address of the sharer
+* Entries in event logs for delete and move actions now include old and new path of the resource for better tracking
+* Folder locking: group admins can now lock folder so that it cannot be renamed/moved/deleted from its current location
+* New section in Admin Panel called 'Access Lists' to manage allow/block lists
+* Admin Panel -> Access Lists -> 'Public Shares' control which all users are allowed to create public shares from personal workspace
+* Admin Panel -> Access Lists -> 'Private Shares' control which all users are allowed to create private shares from personal workspace
+* Admin Panel -> Access Lists -> 'WebDrive Create' control which all users are allowed to create webdrive endpoint for personal workspace
+* Admin Panel -> Access Lists -> 'WebDrive Access' control which all users are allowed to access webdrive endpoint of any workspace
+* Admin Panel -> Access Lists -> 'Domains' control which all external domains are the users allowed to share files with (public shares)
+* Publicly shared Office documents now open in Document Editor (as read only, with waterwark)
+* Improved search functionality in the new UI design
+* Admin Panel: admin can configure disk quota soft limit and its email alerts
+* Admin Panel: admin can configure global Trash retention period
+* Admin Panel: admin can configure whether watermark should be shown in read-only Office files when accessed via private share
+* Admin Panel: admin can configure list of emails to receive copy of public share creation notifications
+* Better compatibility for SSO integration with ADFS
+* Better compatibility with O365 Online editors
+* Web Portal now has option to calculate and show the size of folders
+* [Security] Correct 2FA OTP code can only be used once inside the 30 seconds expiry period
+* [Security] Set additional HTTP headers via nginx for security
+* File upload token is now valid for 2 min (earlier: 5 sec)
+* File search results and event logs in Web Portal now returns upto 500 items at once (earlier: 50)
+* Improved handling of S3 storage backends
+* Several other minor bugs also fixed
+
 v2.0.0 - 26 Feb 2023
 ---
 
