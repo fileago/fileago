@@ -1,6 +1,6 @@
 # FileAgo
 
-**FileAgo** is a secure file management, file sharing and collaboration software for teams and businesses.
+**FileAgo** provides a secure and intuitive data management system, enabling seamless team collaboration. It ensures data privacy with cutting-edge security features for modern businesses.
 
 Visit [fileago.com](https://www.fileago.com) for more details.
 
@@ -9,7 +9,7 @@ Visit [fileago.com](https://www.fileago.com) for more details.
 - Linux (preferably CentOS 7.x)
 - Docker
 - Git client, docker-compose
-- 8 GB RAM
+- 16 GB RAM
 - 4 cores or more
 - Atleast 500 GB of available disk space
 
