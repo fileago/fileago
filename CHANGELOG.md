@@ -1,3 +1,8 @@
+v3.0.1 - 17 Mar 2025
+---
+
+* Minor bug fixes & UI improvements
+
 v3.0.0 - 10 Feb 2025
 ---
 
