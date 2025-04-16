@@ -1,5 +1,6 @@
 #! /bin/sh
 
+PDF=${PDFVIEWER_ENABLED:-false}
 CHAT=${CHAT_ENABLED:-false}
 CAD=${CAD_ENABLED:-false}
 LOOL=${LOOL_ENABLED:-false}
@@ -12,6 +13,11 @@ else
   openssl req -x509 -nodes -days 9131 -newkey rsa:2048 \
     -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt \
     -subj "/C=US/ST=World/L=Earth/O=FileAgo/OU=Web/CN=${WEBHOSTNAME}/emailAddress=admin@${WEBHOSTNAME}"
+fi
+
+## configure pdfviewer endpoints
+if $PDF; then
+  awk '/##__PDFVIEWER_BLOCK_PLACEHOLDER__##/{system("cat /tmp/config_parts/pdfviewer_block.conf");next}1' /tmp/fileago.template > /tmp/fileago.template.1 && rm -f /tmp/fileago.template && mv /tmp/fileago.template.1 /tmp/fileago.template
 fi
 
 ## configure chat endpoints

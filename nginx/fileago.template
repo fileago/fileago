@@ -47,6 +47,8 @@ server {
       proxy_redirect      http://dms https://${WEBHOSTNAME};
     }
 
+##__PDFVIEWER_BLOCK_PLACEHOLDER__##
+
 ##__CHAT_BLOCK_PLACEHOLDER__##
 
 ##__CAD_BLOCK_PLACEHOLDER__##

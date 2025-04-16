@@ -1,0 +1,7 @@
+version: "2.2"
+services:
+  pdfviewer:
+    image: vimal7370/pdfviewer:1.0.5
+    expose:
+      - "80"
+    restart: unless-stopped

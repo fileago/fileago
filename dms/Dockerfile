@@ -1,4 +1,4 @@
-FROM fileago/fileago:3.0.1
+FROM fileago/fileago:3.0.2
 MAINTAINER support@fileago.com
 RUN set -xe \ 
     && apk add --no-cache --purge -uU \ 
