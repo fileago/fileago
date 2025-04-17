@@ -4,6 +4,7 @@ v3.0.2 - 16 Apr 2025
 * User login history is available on the Web Portal to view, for a regular user
 * Email alerts to user on successful & failed login attempts (can be enabled from backend)
 * Added a new Pdf viewer as an alternative to Collabora (can be enabled from backend)
+* Browser sessions that are idle can be invalidated if idle timeout is configured
 * Minor bug fixes & UI improvements
 
 v3.0.1 - 17 Mar 2025
