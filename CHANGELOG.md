@@ -1,3 +1,12 @@
+v3.0.3 - 9 May 2025
+---
+
+* External access share email OTP implementation
+* Admin Panel -> Event Logs can now search by name of the resource
+* ThinkFree editor integration
+* Web Portal session idle timeout
+* Minor bug fixes & UI improvements
+
 v3.0.2 - 16 Apr 2025
 ---
 
