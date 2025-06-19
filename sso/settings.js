@@ -39,6 +39,9 @@ exports.sp_options = {
   // TO CHANGE: set correct hostname for the server
   assert_endpoint: "https://localhost/saml/consume",
 
+  allow_unencrypted_assertion: true,
+  require_session_index: false,
+
   private_key: fs.readFileSync("sso/server.key").toString(),
   certificate: fs.readFileSync("sso/server.crt").toString()
 
@@ -53,6 +56,9 @@ exports.idp_options = {
   // TO CHANGE: set identity provider logout url (given below is Azure AD logout url)
   sso_logout_url: "https://login.microsoftonline.com/common/wsfederation?wa=wsignout1.0",
 
+  allow_unencrypted_assertion: true,
+  require_session_index: false,
+  
   certificates: [fs.readFileSync("sso/idp.pem").toString()]
 
 };

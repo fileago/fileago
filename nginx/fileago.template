@@ -93,6 +93,20 @@ server {
       proxy_request_buffering off;
     }
 
+    location ^~ /collabora {                             
+      proxy_pass          http://dms;                                                       
+      proxy_redirect      http://dms https://${WEBHOSTNAME};
+      add_header Access-Control-Allow-Origin '*';
+      proxy_set_header Host $http_host;        
+    }
+
+    location ^~ /thinkfree {                             
+      proxy_pass          http://dms;                                                       
+      proxy_redirect      http://dms https://${WEBHOSTNAME};
+      add_header Access-Control-Allow-Origin '*';
+      proxy_set_header Host $http_host;        
+    }
+
     location ~* /(.*) {
       location ~ /\. {
         deny all;
