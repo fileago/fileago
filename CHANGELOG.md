@@ -1,3 +1,12 @@
+v3.0.4 - 19 Jun 2025
+---
+
+* Improved data security in Collabora editor
+* Force user to change password during first login
+* Admin functionality to impersonate another user (can be enabled from backend)
+* SIEM integration: Splunk
+* Minor bug fixes & UI improvements
+
 v3.0.3 - 9 May 2025
 ---
 
