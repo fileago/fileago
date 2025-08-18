@@ -3,6 +3,7 @@
 PDF=${PDFVIEWER_ENABLED:-false}
 CHAT=${CHAT_ENABLED:-false}
 CAD=${CAD_ENABLED:-false}
+ICAP=${ICAP_ENABLED:-false}
 LOOL=${LOOL_ENABLED:-false}
 
 if [ -f /tmp/certs/cert.key ] && [ -f /tmp/certs/cert.crt ];
@@ -31,6 +32,11 @@ if $CAD; then
   awk '/##__CAD_BLOCK_PLACEHOLDER__##/{system("cat /tmp/config_parts/cad_block.conf");next}1' /tmp/fileago.template > /tmp/fileago.template.1 && rm -f /tmp/fileago.template && mv /tmp/fileago.template.1 /tmp/fileago.template
 fi
 
+## configure icap endpoints
+if $ICAP; then
+  awk '/##__ICAP_BLOCK_PLACEHOLDER__##/{system("cat /tmp/config_parts/icap_block.conf");next}1' /tmp/fileago.template > /tmp/fileago.template.1 && rm -f /tmp/fileago.template && mv /tmp/fileago.template.1 /tmp/fileago.template
+fi
+
 ## configure lool endpoints
 if $LOOL; then
   awk '/##__LOOL_UPSTREAM_PLACEHOLDER__##/{system("cat /tmp/config_parts/lool_upstream.conf");next}1' /tmp/fileago.template > /tmp/fileago.template.1 && rm -f /tmp/fileago.template && mv /tmp/fileago.template.1 /tmp/fileago.template
@@ -38,4 +44,4 @@ if $LOOL; then
 fi
 
 envsubst '${WEBHOSTNAME}' < /tmp/fileago.template > /etc/nginx/conf.d/default.conf
-exec nginx -g 'daemon off;'
+exec /usr/local/openresty/bin/openresty -g 'daemon off;'

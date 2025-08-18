@@ -6,7 +6,7 @@ Visit [fileago.com](https://www.fileago.com) for more details.
 
 ## Requirements
 
-- Linux (preferably CentOS 7.x)
+- Linux (preferably Ubuntu 24.04 server)
 - Docker
 - Git client, docker-compose
 - 16 GB RAM

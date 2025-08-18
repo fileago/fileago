@@ -7,8 +7,15 @@
 
 ##__CHAT_UPSTREAM_PLACEHOLDER__##
 
+# Custom log format
+log_format fileago '$remote_addr - $remote_user [$time_local] "$request" '
+  '$status $body_bytes_sent "$http_referer" '
+  '"$http_user_agent" "$http_x_forwarded_for" "$http_destination"';
+
 proxy_cache_path /tmp/nginx-cache levels=1:2 keys_zone=fileago:10m max_size=1g inactive=180m use_temp_path=off;
 limit_req_zone $binary_remote_addr$remote_user zone=wdlimit:10m rate=5r/s;
+
+lua_package_path "/usr/local/openresty/lualib/fileago/?.lua;/usr/local/openresty/lualib/?.lua;;";
 
 server {
     listen 443 ssl;
@@ -32,8 +39,8 @@ server {
     ssl_ecdh_curve secp521r1:secp384r1;
     ssl_ciphers EECDH+AESGCM;
 
-    access_log            /var/log/nginx/${WEBHOSTNAME}.access.log;
-    error_log            /var/log/nginx/${WEBHOSTNAME}.error.log debug;
+    access_log            /usr/local/openresty/nginx/logs/${WEBHOSTNAME}.access.log fileago;
+    error_log            /usr/local/openresty/nginx/logs/${WEBHOSTNAME}.error.log debug;
 
     client_max_body_size 50G;
 
@@ -65,6 +72,18 @@ server {
       proxy_set_header        X-Real-IP $remote_addr;
       proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header        X-Forwarded-Proto $scheme;
+    }
+
+    location ~* ^/upload_public {
+      proxy_http_version 1.0;
+      proxy_set_header Connection "";
+      proxy_set_header        X-Real-IP $remote_addr;
+      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header        X-Forwarded-Proto $scheme;
+      proxy_pass          https://127.0.0.1:9999;
+      proxy_redirect      https://127.0.0.1:9999 https://${WEBHOSTNAME};
+      proxy_buffering off;
+      proxy_request_buffering off;
     }
 
     location ~* /(api|auth|install|upload|resources|public|wopi|saml) {
@@ -130,8 +149,10 @@ server {
 }
 
 server {
+    resolver 127.0.0.11;
     listen 9999 ssl;
     server_name nginx;
+    server_tokens off;
     client_max_body_size 50G;
 
     ssl_certificate           /etc/nginx/internal_cert.crt;
@@ -143,8 +164,10 @@ server {
     ssl_ecdh_curve secp521r1:secp384r1;
     ssl_ciphers EECDH+AESGCM;
 
-    access_log            /var/log/nginx/${WEBHOSTNAME}.access.log;
-    error_log            /var/log/nginx/${WEBHOSTNAME}.error.log debug;
+    access_log            /usr/local/openresty/nginx/logs/${WEBHOSTNAME}.internal.access.log fileago;
+    error_log            /usr/local/openresty/nginx/logs/${WEBHOSTNAME}.internal.error.log debug;
+
+##__ICAP_BLOCK_PLACEHOLDER__##
 
     location ~* /(.*) {
       proxy_http_version 1.0;
@@ -157,4 +180,3 @@ server {
       proxy_request_buffering off;
     }
 }
-

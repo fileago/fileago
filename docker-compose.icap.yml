@@ -1,0 +1,6 @@
+services:
+  clamcap:
+    build: ./clamcap
+    expose:
+      - "1344"
+    restart: unless-stopped

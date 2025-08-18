@@ -31,6 +31,7 @@ services:
       - ./db_settings.env
     volumes:
       - ${FILEAGO_BASE}/neo4j/data:/data
+      - ${FILEAGO_BASE}/neo4j/backup:/backup
   nginx:
     build: ./nginx
     ports:
@@ -44,7 +45,7 @@ services:
       - ./settings.env
     volumes:
       - ${FILEAGO_BASE}/nginx:/tmp/certs
-      - ${FILEAGO_BASE}/nginx_logs:/var/log/nginx
+      - ${FILEAGO_BASE}/nginx_logs:/usr/local/openresty/nginx/logs
   lool:
     build: ./lool
     expose:
