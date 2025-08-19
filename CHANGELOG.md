@@ -1,3 +1,13 @@
+v3.0.5 - 19 Aug 2025
+---
+
+* Upload link implementation - receive files from external users
+* Built-in ClamAV powered ICAP service which scans files uploaded by external users
+* [Security] Web Portal now sends username/password in encrypted form over HTTPS
+* Improvement in WebDrive service logic (PUT, MOVE)
+* Improved error handling in Sqlwriter for stability during heavy load
+* Minor bug fixes & UI improvements
+
 v3.0.4 - 19 Jun 2025
 ---
 
