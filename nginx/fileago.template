@@ -126,6 +126,11 @@ server {
       proxy_set_header Host $http_host;        
     }
 
+    location = /file_requests/ {                                         
+      rewrite ^/file_requests/$ /file_requests/index.html break;
+      proxy_pass          http://dms;            
+    }
+
     location ~* /(.*) {
       location ~ /\. {
         deny all;

@@ -61,8 +61,9 @@ function _M.build_proxy_headers(original_headers, config, boundary)
     new_headers["Host"] = host_header
     
     -- Set proxy headers
-    new_headers["X-Forwarded-For"] = ngx.var.remote_addr
-    new_headers["X-Real-IP"] = ngx.var.remote_addr
+    -- Commenting these two headers, as it is causing conflicts
+    -- new_headers["X-Forwarded-For"] = ngx.var.remote_addr
+    -- new_headers["X-Real-IP"] = ngx.var.remote_addr
     new_headers["X-Forwarded-Proto"] = ngx.var.scheme
     new_headers["X-Forwarded-Host"] = ngx.var.host
     new_headers["X-Forwarded-Port"] = ngx.var.server_port

@@ -285,7 +285,8 @@ function _M.validate_mime_type(detected_mime, header_mime)
     local generic_types = {
         "application/octet-stream",
         "application/binary",
-        "binary/octet-stream"
+        "binary/octet-stream",
+        "text/csv"
     }
     
     -- If header is generic, trust the detected type
