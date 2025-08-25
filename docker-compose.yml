@@ -20,7 +20,6 @@ services:
       - ${FILEAGO_BASE}/dms/dblogs:/dms/priv/dblogs
       - ${FILEAGO_BASE}/dms/mnesia:/dms/priv/mnesia
       - ${FILEAGO_BASE}/dms/avatars:/dms/priv/web/images/avatars
-      - ${FILEAGO_BASE}/dms/fonts:/tmp/fonts
   db:
     image: vimal7370/ongdb:3.6
     expose:

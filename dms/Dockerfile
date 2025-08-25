@@ -9,6 +9,6 @@ COPY start.sh /bin/start.sh
 RUN chmod 755 /bin/start.sh
 EXPOSE 8080
 ENV SECRETCOOKIE mysecretcookie
-VOLUME ["/dms/priv/data", "/dms/priv/dblogs", "/dms/priv/mnesia", "/dms/priv/web/images/avatars", "/tmp/fonts"]
+VOLUME ["/dms/priv/data", "/dms/priv/dblogs", "/dms/priv/mnesia", "/dms/priv/web/images/avatars"]
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD /bin/sh -c /bin/start.sh
