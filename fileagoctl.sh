@@ -241,7 +241,7 @@ case $COMMAND in
         fi
 
         # Create cron file
-        echo "0 1 * * * root cd \"$CURRENT_DIR/cron\" && /bin/sh cron.sh" | tee "$CRON_FILE" > /dev/null
+        echo "0 1 * * * root cd \"$CURRENT_DIR/cron\" && /bin/bash cron.sh" | tee "$CRON_FILE" > /dev/null
         chmod 644 "$CRON_FILE"
         
         echo -e "${GREEN}Cron job installed successfully at $CRON_FILE${NC}"
