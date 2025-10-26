@@ -4,7 +4,9 @@ RUN set -xe \
     && apk add --no-cache --purge -uU \ 
        openldap-clients wget sqlite \
     && rm -rf /var/cache/apk/* /tmp/*
-RUN wget --no-check-certificate https://dl.min.io/client/mc/release/linux-amd64/archive/mc.RELEASE.2025-04-16T18-13-26Z -O /usr/bin/mc && chmod 755 /usr/bin/mc
+RUN cd /tmp && wget --no-check-certificate https://raw.githubusercontent.com/fileago/resources/refs/heads/main/mc.RELEASE.2025-04-16T18-13-26Z.tar.gz \ 
+    && tar zxf mc.RELEASE.2025-04-16T18-13-26Z.tar.gz && chmod 755 mc.RELEASE.2025-04-16T18-13-26Z && mv mc.RELEASE.2025-04-16T18-13-26Z /usr/bin/mc \ 
+    && rm -f mc.RELEASE.2025-04-16T18-13-26Z.tar.gz
 COPY start.sh /bin/start.sh 
 RUN chmod 755 /bin/start.sh
 EXPOSE 8080
