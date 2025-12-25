@@ -1,3 +1,13 @@
+v3.0.6 - 25 Dec 2025
+---
+
+* Implemented share approval/rejection mechanism
+* Encrypted session storage for improved security
+* Improved support for wopi O365 latest standards
+* Trash folder of group workspace can be hidden for group members if required
+* Fixed issues with bulk downloads through browser
+* Several bug fixes & UI improvements
+
 v3.0.5 - 19 Aug 2025
 ---
 
