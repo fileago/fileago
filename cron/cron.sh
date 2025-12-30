@@ -39,10 +39,10 @@ fi
 containers=$(docker compose -f ../docker-compose.yml ps --format json)
 
 # Process nginx container
-nginx_container=$(echo "$containers" | jq -r 'select(.Service == "nginx") | .Name')
+nginx_container=$(echo "$containers" | jq -r '(if type=="array" then .[] else . end) | select(.Service == "nginx") | .Name')
 if [ -n "$nginx_container" ]; then
     # Check if nginx container is running
-    nginx_status=$(echo "$containers" | jq -r 'select(.Service == "nginx") | .State')
+    nginx_status=$(echo "$containers" | jq -r '(if type=="array" then .[] else . end) | select(.Service == "nginx") | .State')
     if [ "$nginx_status" == "running" ]; then
         echo "Running logrotate for nginx container: $nginx_container"
         docker exec "$nginx_container" /usr/sbin/logrotate /etc/logrotate.d/nginx
@@ -50,10 +50,10 @@ if [ -n "$nginx_container" ]; then
 fi
 
 # Process lool container
-lool_container=$(echo "$containers" | jq -r 'select(.Service == "lool") | .Name')
+lool_container=$(echo "$containers" | jq -r '(if type=="array" then .[] else . end) | select(.Service == "lool") | .Name')
 if [ -n "$lool_container" ]; then
     # Check if lool container is running
-    lool_status=$(echo "$containers" | jq -r 'select(.Service == "lool") | .State')
+    lool_status=$(echo "$containers" | jq -r '(if type=="array" then .[] else . end) | select(.Service == "lool") | .State')
     if [ "$lool_status" == "running" ]; then
         echo "Cleaning temporary files for lool container: $lool_container"
         # Remove all *.tmp files from /tmp directory
@@ -62,10 +62,10 @@ if [ -n "$lool_container" ]; then
 fi
 
 # Process db container
-db_container=$(echo "$containers" | jq -r 'select(.Service == "db") | .Name')
+db_container=$(echo "$containers" | jq -r '(if type=="array" then .[] else . end) | select(.Service == "db") | .Name')
 if [ -n "$db_container" ]; then
     # Check if db container is running
-    db_status=$(echo "$containers" | jq -r 'select(.Service == "db") | .State')
+    db_status=$(echo "$containers" | jq -r '(if type=="array" then .[] else . end) | select(.Service == "db") | .State')
     if [ "$db_status" == "running" ]; then
         echo "Cleaning up log files for db container: $db_container"
         # Remove all *.log.* files from /var/lib/neo4j/logs/
