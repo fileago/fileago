@@ -33,7 +33,7 @@ _M.icap_url = string.format("icap://%s:%d/%s",
 -- Upload and Timeout Configuration
 _M.chunk_size = tonumber(env_or_default("UPLOAD_CHUNK_SIZE", "4096"))
 _M.upload_timeout = tonumber(env_or_default("UPLOAD_TIMEOUT", "5000"))
-_M.socket_timeout = tonumber(env_or_default("SOCKET_TIMEOUT", "5000"))
+_M.socket_timeout = tonumber(env_or_default("SOCKET_TIMEOUT", "120000"))
 
 -- Preview Configuration
 _M.preview_size = tonumber(env_or_default("ICAP_PREVIEW_SIZE", "1024"))
@@ -46,8 +46,8 @@ _M.backend_port = tonumber(env_or_default("BACKEND_PORT", "8080"))
 -- Logging Configuration (setting to false will still log ERR)
 _M.log_icap_traffic = env_or_default("LOG_ICAP_TRAFFIC", false)
 
--- Mime Type Verification (recommended: true)
-_M.check_mime_type = env_or_default("CHECK_MIME_TYPE", true)
+-- Mime Type Verification (recommended: true but at your own risk. Defaults to false)
+_M.check_mime_type = env_or_default("CHECK_MIME_TYPE", false)
 
 -- Allowed File Extensions (comma-separated, empty allows all) e.g.: ".txt,.pdf,.docx"
 _M.allowed_extensions = env_or_default("ALLOWED_EXTENSIONS", "")
