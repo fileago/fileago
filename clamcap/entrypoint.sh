@@ -14,6 +14,10 @@ while [ ! -e /run/clamav/clamd.sock ]; do
 	sleep 5
 done
 
+if [ -e /var/run/c-icap/c-icap.pid ]; then
+	rm /var/run/c-icap/c-icap.pid
+fi
+
 /usr/local/c-icap/bin/c-icap -N -D &
 
 pids=`jobs -p`
