@@ -9,7 +9,7 @@
 
 #!/bin/bash
 
-# fileagoctl.sh - Script to manage FileAgo services using docker-compose
+# fileagoctl.sh - Script to manage FileAgo services using Docker Compose
 
 # Colors for output
 RED='\033[0;31m'
@@ -44,9 +44,9 @@ usage() {
     exit 1
 }
 
-# Check if docker-compose is installed
-if ! command -v docker-compose &> /dev/null; then
-    echo -e "${RED}Error: docker-compose is not installed${NC}"
+# Check if Docker Compose plugin is installed
+if ! docker compose version &> /dev/null; then
+    echo -e "${RED}Error: Docker Compose plugin is not installed${NC}"
     exit 1
 fi
 
@@ -98,7 +98,7 @@ read_settings() {
     done < "settings.env"
 }
 
-# Function to build docker-compose command
+# Function to build Docker Compose command
 build_compose_command() {
     local action=$1
     local compose_files="-f docker-compose.yml"
@@ -144,10 +144,10 @@ build_compose_command() {
         fi
     fi
     
-    echo "docker-compose $compose_files $action"
+    echo "docker compose $compose_files $action"
 }
 
-# Function to execute docker-compose command
+# Function to execute Docker Compose command
 execute_compose() {
     local cmd=$1
     echo -e "${GREEN}Executing: $cmd${NC}"
@@ -206,12 +206,6 @@ case $COMMAND in
         execute_compose "$COMPOSE_CMD"
         ;;
     installcron)
-        # Check if Docker Compose plugin is installed
-        if ! docker compose version &> /dev/null; then
-            echo -e "${RED}Error: Docker Compose plugin is not installed${NC}"
-            exit 1
-        fi
-
         # Check if jq is installed
         if ! command -v jq &> /dev/null; then
             echo "Error: jq is not installed"
