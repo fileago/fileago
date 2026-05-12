@@ -67,7 +67,7 @@ end
 local function process_upload_enhanced()
     -- Initialize error handling and resource tracking
     local error_context = error_handler.create_error_context()
-    local timeout_context = error_handler.create_timeout_context(60)  -- 60 second timeout for large files
+    local timeout_context = error_handler.create_timeout_context(config.total_upload_timeout)
     local resource_tracker = resource_manager.create_resource_tracker()
     
     write_to_log(ngx.INFO, "Starting enhanced upload processing: " .. ngx.var.request_uri)

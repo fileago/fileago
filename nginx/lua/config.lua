@@ -32,8 +32,11 @@ _M.icap_url = string.format("icap://%s:%d/%s",
 
 -- Upload and Timeout Configuration
 _M.chunk_size = tonumber(env_or_default("UPLOAD_CHUNK_SIZE", "4096"))
-_M.upload_timeout = tonumber(env_or_default("UPLOAD_TIMEOUT", "5000"))
+_M.upload_timeout = tonumber(env_or_default("UPLOAD_TIMEOUT", "30000"))
+_M.total_upload_timeout = tonumber(env_or_default("TOTAL_UPLOAD_TIMEOUT", "300"))
 _M.socket_timeout = tonumber(env_or_default("SOCKET_TIMEOUT", "120000"))
+-- '_M.total_upload_timeout' and nginx's proxy_send_timeout, client_body_timeout for
+-- /upload_public/ path to be increased for large file public uploads in slow networks
 
 -- Preview Configuration
 _M.preview_size = tonumber(env_or_default("ICAP_PREVIEW_SIZE", "1024"))

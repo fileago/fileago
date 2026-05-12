@@ -84,8 +84,8 @@ server {
       proxy_redirect      https://127.0.0.1:9999 https://${WEBHOSTNAME};
       proxy_buffering off;
       proxy_request_buffering off;
-      proxy_send_timeout 180s;
-      client_body_timeout 180s;
+      proxy_send_timeout 330s;
+      client_body_timeout 330s;
     }
 
     location ~* ^/(upload|wopi|wopi_thinkfree|wopi_o365)/ {
