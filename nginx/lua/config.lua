@@ -55,12 +55,17 @@ _M.check_mime_type = env_or_default("CHECK_MIME_TYPE", false)
 -- Allowed File Extensions (comma-separated, empty allows all) e.g.: ".txt,.pdf,.docx"
 _M.allowed_extensions = env_or_default("ALLOWED_EXTENSIONS", "")
 
--- Limits exeeded behaviour (allow/block). Used to decide behaviour when Clamav returns 
--- 403 with header "Heuristics.Limits.Exceeded.MaxFileSize" for very large files. Setting
+-- ICAP scan timeout behaviour (allow/block). Setting it to "allow" will bypass
+-- antivirus scanning when the ICAP server times out without a final scan verdict
+-- (recommended: block).
+_M.icap_timeout_behaviour = tostring(env_or_default("ICAP_TIMEOUT_BEHAVIOUR", "block")):lower()
+
+-- Limits exeeded behaviour (allow/block). Used to decide behaviour when Clamav returns
+-- 403 with a "Heuristics.Limits.Exceeded.*" header for files that exceed scan limits. Setting
 -- it to "allow" will bypass scan on very large files, and setting it to "block" will
 -- prevent files larger than MaxScanSize & MaxFileSize limits in clamd.conf
 -- from being uploaded successfully (recommended: block).
-_M.limits_exceeded_behaviour = env_or_default("LIMITS_EXCEEDED_BEHAVIOUR", "block")
+_M.limits_exceeded_behaviour = tostring(env_or_default("LIMITS_EXCEEDED_BEHAVIOUR", "block")):lower()
 
 -- Generate backend URL function
 function _M.get_backend_url(req_uri)

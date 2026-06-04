@@ -32,6 +32,10 @@ local function write_to_log(log_type, log_msg)
     end
 end
 
+local function is_timeout_error(err)
+    return err and err:find("timeout", 1, true) ~= nil
+end
+
 -- Helper function to check if file extension is allowed
 local function is_allowed_extension(filename)
     if not config.allowed_extensions or config.allowed_extensions == "" then
@@ -315,9 +319,22 @@ local function process_upload_enhanced()
     -- Perform ICAP scan with enhanced buffer
     local scan_result, scan_err = icap_streamer.scan_file_with_icap(icap_sock, file_buffer, config, write_to_log)
     if not scan_result then
-        error_handler.handle_error(error_context, "ICAP_CONNECTION_ERROR",
-                                 "ICAP scan failed: " .. (scan_err or "unknown"), write_to_log)
-        return false, "ICAP scan failed"
+        if config.icap_timeout_behaviour == "allow" and is_timeout_error(scan_err) then
+            write_to_log(ngx.WARN, string.format(
+                "ICAP scan timed out for '%s' but configured to allow upload: %s",
+                file_buffer.filename or "unknown",
+                scan_err or "unknown"
+            ))
+            scan_result = {
+                result = "timeout_allowed",
+                status_code = 0,
+                message = "ICAP scan timed out and upload was allowed"
+            }
+        else
+            error_handler.handle_error(error_context, "ICAP_CONNECTION_ERROR",
+                                     "ICAP scan failed: " .. (scan_err or "unknown"), write_to_log)
+            return false, "ICAP scan failed"
+        end
     end
     
     -- Process scan results
@@ -331,6 +348,8 @@ local function process_upload_enhanced()
         end
     elseif scan_result.result == "clean" then
         write_to_log(ngx.INFO, "File '" .. file_buffer.filename .. "' passed ICAP security scan - APPROVED for backend forwarding")
+    elseif scan_result.result == "timeout_allowed" then
+        write_to_log(ngx.WARN, "File '" .. (file_buffer.filename or "unknown") .. "' forwarded without completed ICAP scan due to timeout allow policy")
     else
         write_to_log(ngx.WARN, "Unexpected ICAP scan result: " .. (scan_result.result or "unknown"))
     end
@@ -339,13 +358,13 @@ local function process_upload_enhanced()
     icap_streamer.close_icap_connection(icap_sock, write_to_log)
     resource_manager.cleanup_socket(resource_tracker, icap_socket_id, write_to_log)
     
-    -- Phase 6: Forward to backend (ONLY AFTER ICAP APPROVAL)
+    -- Phase 6: Forward to backend (after ICAP approval or configured bypass)
     error_handler.set_phase(error_context, "backend_forwarding")
     
     local req_uri = ngx.var.request_uri or "/"
     local backend_url = config.get_backend_url(req_uri)
-    write_to_log(ngx.INFO, string.format("Forwarding ICAP-approved file to backend: %s (%s mode, %d bytes)", 
-                                        backend_url, file_buffer.mode, file_buffer.total_size))
+    write_to_log(ngx.INFO, string.format("Forwarding file to backend after ICAP result '%s': %s (%s mode, %d bytes)", 
+                                        scan_result.result, backend_url, file_buffer.mode, file_buffer.total_size))
     
     -- Set longer timeout for large files
     if file_buffer.total_size > 100 * 1024 * 1024 then  -- > 100MB

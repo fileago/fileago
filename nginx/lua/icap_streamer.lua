@@ -180,14 +180,19 @@ function _M.parse_icap_status(status_line)
     }
 end
 
--- Check if response indicates file size limit exceeded
-function _M.is_max_filesize_exceeded(headers)
+-- Check if response indicates a scanner limit was exceeded.
+function _M.is_scan_limit_exceeded(headers)
     if not headers then
         return false
     end
     
     local headers_str = table.concat(headers, " | ")
-    return headers_str:find("Heuristics.Limits.Exceeded.MaxFileSize", 1, true) ~= nil
+    return headers_str:find("Heuristics.Limits.Exceeded.", 1, true) ~= nil
+end
+
+-- Backward-compatible alias for older callers.
+function _M.is_max_filesize_exceeded(headers)
+    return _M.is_scan_limit_exceeded(headers)
 end
 
 -- Complete ICAP scanning workflow (fixed to match original exactly)
@@ -279,13 +284,13 @@ function _M.scan_file_with_icap(sock, buffer, config, write_to_log)
             if http_line then
                 write_to_log(ngx.INFO, "Embedded HTTP response: " .. http_line)
                 if http_line:find("403 Forbidden") then
-                    local is_size_exceeded = _M.is_max_filesize_exceeded(icap_headers)
+                    local is_limit_exceeded = _M.is_scan_limit_exceeded(icap_headers)
                     
                     return {
                         result = "blocked",
                         status_code = 403,
-                        message = is_size_exceeded and "File size limit exceeded" or "File blocked by security scan",
-                        is_size_limit = is_size_exceeded,
+                        message = is_limit_exceeded and "Scanner limit exceeded" or "File blocked by security scan",
+                        is_size_limit = is_limit_exceeded,
                         headers = icap_headers
                     }
                 end
